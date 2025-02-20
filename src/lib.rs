@@ -32,7 +32,6 @@
 //! 
 //! `DeviceInfo`接口用于保存设备信息，比如设备名称、vendor、类型……，目前改接口还在设计中。
 #![no_std]
-#![feature(error_generic_member_access)]
 #[cfg(feature = "block")]
 mod block_dev;
 #[cfg(feature = "bus")]

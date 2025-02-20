@@ -1,4 +1,4 @@
-use core::{error::Error, fmt::Display};
+use core::fmt::Display;
 
 /// 设备错误信息
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -18,36 +18,6 @@ pub enum DeviceError {
     OutOfMemory,
     AlreadyInitialized,
     UnknownError,
-}
-
-impl Error for DeviceError {
-    fn source(&self) -> Option<&(dyn Error + 'static)> {
-        match self {
-            DeviceError::DeviceNotFound => Some(&Self::DeviceNotFound),
-            DeviceError::PermissionDenied => Some(&Self::PermissionDenied),
-            DeviceError::DeviceBusy => Some(&Self::DeviceBusy),
-            DeviceError::IoError => Some(&Self::IoError),
-            DeviceError::Timeout => Some(&Self::Timeout),
-            DeviceError::Disconnected => Some(&Self::Disconnected),
-            DeviceError::DataCorruption => Some(&Self::DataCorruption),
-            DeviceError::NoSpaceLeft => Some(&Self::NoSpaceLeft),
-            DeviceError::InvalidConfiguration => Some(&Self::InvalidConfiguration),
-            DeviceError::UnsupportedOperation => Some(&Self::UnsupportedOperation),
-            DeviceError::InvalidParameter => Some(&Self::InvalidParameter),
-            DeviceError::BadAddress => Some(&Self::BadAddress),
-            DeviceError::OutOfMemory => Some(&Self::OutOfMemory),
-            DeviceError::AlreadyInitialized => Some(&Self::AlreadyInitialized),
-            DeviceError::UnknownError => Some(&Self::UnknownError),
-        }
-    }
-
-    fn cause(&self) -> Option<&dyn Error> {
-        self.source()
-    }
-
-    fn provide<'a>(&'a self, request: &mut core::error::Request<'a>) {
-        request.provide_value(*self);
-    }
 }
 
 impl Display for DeviceError {
